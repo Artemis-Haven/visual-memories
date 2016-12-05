@@ -25,6 +25,8 @@ doctrine:
 sonata_media:
     db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr it is mandatory to choose one here
     default_context: default # you need to set a context
+    class:
+        category: null
     contexts:
         default:  # the default context is mandatory
             providers:
@@ -40,3 +42,5 @@ sonata_media:
         local:
             directory:  "%kernel.root_dir%/../web/uploads/media"
             create: false
+    force_disable_category: true # true, if you really want to disable the relation with category
+    category_manager:       null  # null or "sonata.media.manager.category.default" if classification bundle 

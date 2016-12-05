@@ -6,6 +6,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Contrôleur gérant les pages publiques, principalement la page d'accueil
+ */
 class DefaultController extends Controller
 {
     /**

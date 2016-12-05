@@ -10,7 +10,7 @@ install:
 	@echo "create assets dump"
 	php app/console assets:install --symlink
 	@echo "exec database migration"
-	php app/console doctrine:migrations:migrate
+	php app/console doctrine:schema:update --force
 	@echo "load default fixtures"
 	php app/console doctrine:fixtures:load
 	
