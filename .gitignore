@@ -25,3 +25,8 @@
 
 # Composer PHAR
 /composer.phar
+
+# Eclipse files
+.buildpath
+.settings
+.project
