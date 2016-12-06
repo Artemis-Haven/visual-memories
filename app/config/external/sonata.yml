@@ -18,23 +18,39 @@ doctrine:
         entity_managers:
             default:
                 mappings:
+                    FOSUserBundle: ~ 
                     ApplicationSonataUserBundle: ~
+                    ApplicationSonataMediaBundle: ~
+                    ApplicationSonataClassificationBundle: ~
                     SonataUserBundle: ~
-                    FOSUserBundle: ~    # If SonataUserBundle extends it
+                    SonataMediaBundle: ~
+                    SonataClassificationBundle: ~
 
 sonata_media:
     db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr it is mandatory to choose one here
-    default_context: default # you need to set a context
+    default_context: 1 # you need to set a context
     class:
-        category: null
+        category: Application\Sonata\ClassificationBundle\Entity\Category
     contexts:
-        default:  # the default context is mandatory
+        1:  # the default context is mandatory
             providers:
                 - sonata.media.provider.image
                 - sonata.media.provider.file
             formats:
                 small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
+        sonata_collection:
+            providers:
+              - sonata.media.provider.image
+            formats:
+                preview: { width: 100, quality: 100}
+                wide:    { width: 820, quality: 100}
+        sonata_category:
+            providers:
+              - sonata.media.provider.image
+            formats:
+                preview: { width: 100, quality: 100}
+                wide:    { width: 820, quality: 100}
     cdn:
         server:
             path: /uploads/media # http://media.sonata-project.org/
@@ -42,5 +58,16 @@ sonata_media:
         local:
             directory:  "%kernel.root_dir%/../web/uploads/media"
             create: false
-    force_disable_category: true # true, if you really want to disable the relation with category
-    category_manager:       null  # null or "sonata.media.manager.category.default" if classification bundle 
+
+sonata_classification:
+    class:
+        #tag:      Application\Sonata\ClassificationBundle\Entity\Tag
+        #category:      Application\Sonata\ClassificationBundle\Entity\Category
+        #collection:      Application\Sonata\ClassificationBundle\Entity\Collection
+        #media:        Application\Sonata\MediaBundle\Entity\Media
+        #context:      Application\Sonata\ClassificationBundle\Entity\Collection
+    #admin:
+        #category:
+            #class:        Sonata\ClassificationBundle\Admin\CategoryAdmin
+            #controller:   SonataClassificationBundle:CategoryAdminController
+            #translation:  SonataClassificationBundle

@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Sonata\MediaBundle\SonataMediaBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
+            new Sonata\ClassificationBundle\SonataClassificationBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
 
             // Nos bundles :
@@ -45,6 +46,7 @@ class AppKernel extends Kernel
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
             // Bundle contenant nos entités et pages liées à la gestion des médias (images, fichiers)
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+            new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

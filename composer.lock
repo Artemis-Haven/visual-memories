@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1b0ccbea56a8b48d23cd32fe27ebd928",
-    "content-hash": "50d0bcbee501e5123fe7d930d7d12169",
+    "hash": "6c7ff56d60d659d75d451c981a110fca",
+    "content-hash": "04c14f3e1a9be668c3fdfdaa1b17d77a",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -2740,6 +2740,85 @@
             "time": "2015-09-18 14:40:58"
         },
         {
+            "name": "sonata-project/classification-bundle",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sonata-project/SonataClassificationBundle.git",
+                "reference": "26badd7ed2271113a6f46324377b9d795bb9c096"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/26badd7ed2271113a6f46324377b9d795bb9c096",
+                "reference": "26badd7ed2271113a6f46324377b9d795bb9c096",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3 || ^7.0",
+                "sonata-project/admin-bundle": "^3.0",
+                "sonata-project/datagrid-bundle": "^2.2",
+                "sonata-project/doctrine-orm-admin-bundle": "^3.0",
+                "symfony/config": "^2.3.9 || ^3.0",
+                "symfony/console": "^2.3 || ^3.0",
+                "symfony/dependency-injection": "^2.3.3 || ^3.0",
+                "symfony/form": "^2.3.5 || ^3.0",
+                "symfony/http-foundation": "^2.3 || ^3.0",
+                "symfony/http-kernel": "^2.3 || ^3.0",
+                "symfony/options-resolver": "^2.3 || ^3.0"
+            },
+            "conflict": {
+                "jms/serializer": "<0.13",
+                "sonata-project/block-bundle": "<3.0 || >=4.0",
+                "sonata-project/media-bundle": "<3.0 || >=4.0"
+            },
+            "require-dev": {
+                "friendsofsymfony/rest-bundle": "^1.1",
+                "jms/serializer-bundle": "^0.13 || ^1.0",
+                "sllh/php-cs-fixer-styleci-bridge": "^2.0",
+                "sonata-project/block-bundle": "^3.0",
+                "sonata-project/media-bundle": "^3.0",
+                "symfony/phpunit-bridge": "^2.7 || ^3.0"
+            },
+            "suggest": {
+                "sonata-project/block-bundle": "For rendering dynamic list blocks on a page.",
+                "sonata-project/media-bundle": "For media management"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sonata\\ClassificationBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sonata Community",
+                    "homepage": "https://github.com/sonata-project/SonataClassificationBundle/contributors"
+                },
+                {
+                    "name": "Thomas Rabaix",
+                    "email": "thomas.rabaix@sonata-project.org",
+                    "homepage": "https://sonata-project.org"
+                }
+            ],
+            "description": "Symfony SonataClassificationBundle",
+            "homepage": "https://sonata-project.org/bundles/classification",
+            "keywords": [
+                "category",
+                "tag",
+                "taxonomy"
+            ],
+            "time": "2016-07-05 07:59:37"
+        },
+        {
             "name": "sonata-project/core-bundle",
             "version": "3.1.1",
             "source": {
@@ -3243,24 +3322,25 @@
         },
         {
             "name": "sonata-project/media-bundle",
-            "version": "dev-master",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataMediaBundle.git",
-                "reference": "81bc9f8"
+                "reference": "fabd14b939267ab9ef622963f14aed1cf26caa4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/81bc9f8",
-                "reference": "81bc9f8",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/fabd14b939267ab9ef622963f14aed1cf26caa4c",
+                "reference": "fabd14b939267ab9ef622963f14aed1cf26caa4c",
                 "shasum": ""
             },
             "require": {
                 "imagine/imagine": "^0.6",
                 "jms/serializer-bundle": "^0.13 || ^1.0",
-                "knplabs/gaufrette": "^0.1.6",
+                "knplabs/gaufrette": "^0.1.6 || ^0.2",
                 "kriswallsmith/buzz": "^0.15",
                 "php": "^5.3 || ^7.0",
+                "sonata-project/classification-bundle": "^3.0",
                 "sonata-project/core-bundle": "^3.0",
                 "sonata-project/doctrine-extensions": "^1.0",
                 "sonata-project/easy-extends-bundle": "^2.1",
@@ -3286,7 +3366,6 @@
                 "friendsofsymfony/rest-bundle": "<1.7.4 || >=3.0",
                 "jms/serializer": "<0.13",
                 "sonata-project/block-bundle": "<3.1.1 || >=4.0",
-                "sonata-project/classification-bundle": "<3.0 || >=5.0",
                 "sonata-project/seo-bundle": "<2.0 || >=3.0"
             },
             "require-dev": {
@@ -3306,7 +3385,6 @@
             "suggest": {
                 "liip/imagine-bundle": "^0.9",
                 "rackspace/php-opencloud": "^1.6",
-                "sonata-project/classification-bundle": "If you want to categorize your media items.",
                 "sonata-project/doctrine-orm-admin-bundle": "^3.0",
                 "sonata-project/seo-bundle": "^2.0",
                 "tilleuls/ckeditor-sonata-media-bundle": "^1.0"
@@ -3314,7 +3392,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.x-dev"
+                    "dev-master": "3.x-dev"
                 }
             },
             "autoload": {
@@ -3352,7 +3430,7 @@
                 "vimeo",
                 "youtube"
             ],
-            "time": "2016-09-26 06:22:41"
+            "time": "2016-09-08 12:49:24"
         },
         {
             "name": "sonata-project/notification-bundle",
@@ -4850,9 +4928,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "sonata-project/media-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

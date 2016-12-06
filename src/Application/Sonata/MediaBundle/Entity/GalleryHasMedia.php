@@ -3,14 +3,14 @@
 namespace Application\Sonata\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sonata\MediaBundle\Entity\BaseGalleryItem as BaseGalleryItem;
+use Sonata\MediaBundle\Entity\BaseGalleryHasMedia as BaseGalleryHasMedia;
 
 /**
  *
- * @ORM\Table(name="media__gallery_media")
+ * @ORM\Table(name="media__gallery_has_media")
  * @ORM\Entity()
  */
-class GalleryItem extends BaseGalleryItem
+class GalleryHasMedia extends BaseGalleryHasMedia
 {
     /**
      * @var int $id
