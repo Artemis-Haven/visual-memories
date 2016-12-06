@@ -27,7 +27,10 @@
         "sonata-project/admin-bundle": "^3.0",
         "sonata-project/doctrine-orm-admin-bundle": "^3.0",
         "sonata-project/user-bundle": "^3.0",
-        "sonata-project/media-bundle": "dev-master#81bc9f8"
+        "sonata-project/media-bundle": "dev-master#81bc9f8",
+        "FortAwesome/Font-Awesome": "^4.7",
+        "twbs/bootstrap": "^3.3",
+        "symfony/assetic-bundle": "^2.8"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "~2.7"
