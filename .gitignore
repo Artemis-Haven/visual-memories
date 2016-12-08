@@ -19,9 +19,6 @@
 /web/bundles/
 /web/uploads/
 /web/assetic/
-/web/css/
-/web/js/
-/web/fonts/
 
 # Composer PHAR
 /composer.phar

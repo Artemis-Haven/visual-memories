@@ -75,7 +75,9 @@ swiftmailer:
 
 # Assetic Configuration
 assetic:
-    use_controller: false
+    debug:          %kernel.debug%
+    use_controller: %kernel.debug%
+    write_to:       %kernel.root_dir%/../web/assetic/
     filters:
         cssrewrite: ~
     assets:

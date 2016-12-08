@@ -1,0 +1,49 @@
+/* Reprise du style de la zone Admin pour le menu Utilisateur */
+
+.bg-light-blue {
+    background-color: #3c8dbc !important;
+}
+
+.btn.btn-flat {
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-width: 1px;
+}
+
+nav.navbar .user-menu .dropdown-menu {
+	width: 280px;
+	padding: 0px;
+}
+
+nav.navbar .user-header {
+	height: 175px;
+    padding: 10px;
+    text-align: center;
+}
+
+nav.navbar .user-header > img {
+    z-index: 5;
+    height: 90px;
+    width: 90px;
+    border: 3px solid;
+    border-color: transparent;
+    border-color: rgba(255,255,255,0.2);
+}
+
+nav.navbar .user-header > p {
+    z-index: 5;
+    color: #fff;
+    color: rgba(255,255,255,0.8);
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+nav.navbar .user-footer {
+    background-color: #f9f9f9;
+    padding: 10px 10px 40px 10px;
+}
+
+
+
