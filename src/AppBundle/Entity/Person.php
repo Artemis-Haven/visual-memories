@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Application\Sonata\MediaBundle\Entity\Gallery;
 
 /**
  * Person
@@ -108,6 +109,13 @@ class Person
      * @ORM\OneToMany(targetEntity="ParentRelationship", mappedBy="child")
      */
     private $parentsRelationships;
+    
+    /**
+     * @var Gallery
+     * 
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", cascade={"persist"})
+     */
+	private $gallery;
     
     
     
@@ -471,6 +479,30 @@ class Person
     public function getParentsRelationships()
     {
         return $this->parentsRelationships;
+    }
+
+    /**
+     * Set gallery
+     *
+     * @param Gallery $gallery
+     *
+     * @return Person
+     */
+    public function setGallery(Gallery $gallery = null)
+    {
+        $this->gallery = $gallery;
+
+        return $this;
+    }
+
+    /**
+     * Get gallery
+     *
+     * @return Gallery
+     */
+    public function getGallery()
+    {
+        return $this->gallery;
     }
 }
 

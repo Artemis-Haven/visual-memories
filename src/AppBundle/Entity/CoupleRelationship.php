@@ -47,8 +47,16 @@ class CoupleRelationship
      * @ORM\JoinColumn()
      */
     private $person2;
+    
+    
+    
+    public function __toString()
+    {
+    	return ($this->type ?: "Union")." de ".$this->person1." et ".$this->person1;
+    }
+    
 
-
+    
     /**
      * Get id
      *
