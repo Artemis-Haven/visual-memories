@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h3>Lieu : {{ place }}</h3>
+
+<table class="table table-bordered table-striped">
+	<tr>
+		<th>Nom</th>
+		<td>{{ place }}</td>
+	</tr>
+	<tr>
+		<th>Description</th>
+		<td>{{ place.description }}</td>
+	</tr>
+	<tr>
+		<th>Pays</th>
+		<td>{{ place.country }}</td>
+	</tr>
+</table>
+
+
+{% endblock %}

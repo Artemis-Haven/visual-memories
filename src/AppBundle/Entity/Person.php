@@ -201,7 +201,7 @@ class Person
      */
     public function setSex($sex)
     {
-    	if ($sex == null || in_array($sex, self::SEX_FEMALE, self::SEX_MALE))
+    	if ($sex == null || in_array($sex, [self::SEX_FEMALE, self::SEX_MALE]))
 	        $this->sex = $sex;
 
         return $this;

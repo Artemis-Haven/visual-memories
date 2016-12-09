@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h3>Personne : {{ person }} <small><a href="{{ path('person_edit', {'id': person.id}) }}">Editer</a></small></h3>
+
+<table class="table table-bordered table-striped">
+	<tr>
+		<th>Nom</th>
+		<td>{{ person }}</td>
+	</tr>
+	<tr>
+		<th>Date de naissance</th>
+		<td>{{ person.birthDate ? person.birthDate|date('d/m/Y') : 'Non renseignée' }}</td>
+	</tr>
+	<tr>
+		<th>Notes</th>
+		<td>{{ person.notes }}</td>
+	</tr>
+</table>
+
+
+{% endblock %}

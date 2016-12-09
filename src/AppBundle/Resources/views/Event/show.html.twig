@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h3>Evénement : {{ event }}</h3>
+
+<table class="table table-bordered table-striped">
+	<tr>
+		<th>Nom</th>
+		<td>{{ event }}</td>
+	</tr>
+	<tr>
+		<th>Description</th>
+		<td>{{ event.description }}</td>
+	</tr>
+	<tr>
+		<th>Lieu</th>
+		<td>{{ event.place }} {{ event.place is defined and event.place.country ? '('~event.place.country~')' }}</td>
+	</tr>
+</table>
+
+
+{% endblock %}
