@@ -18,11 +18,15 @@ class PersonType extends AbstractType
         $builder
             ->add('birthDate', null, [
             	'label' => "Date de naissance",
-            	'required' => false
+            	'required' => false,
+	            'widget' => 'single_text',
+	            'datepicker' => true,
             ])
             ->add('deathDate', null, [
             	'label' => "Date de décès",
-            	'required' => false
+            	'required' => false,
+	            'widget' => 'single_text',
+	            'datepicker' => true,
             ])
             ->add('sex', 'choice', [
             	'label' => "Sexe",

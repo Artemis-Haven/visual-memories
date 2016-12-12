@@ -3,15 +3,18 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Visual Memories{% endblock %}</title>
-        {% stylesheets 
-            '@bootstrap_css' 
-            '@fontawesome_css' 
-            'css/main.css'
-            filter='cssrewrite' 
-            output='style.min.css' 
-        %}
-            <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
-        {% endstylesheets %}
+        {% block stylesheets %}
+	        {% stylesheets 
+	            '@bootstrap_css' 
+	            '@fontawesome_css' 
+	    		'@MopaBootstrapBundle/Resources/public/components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css'
+   				'css/main.css'
+	            filter='cssrewrite' 
+	            output='style.min.css' 
+	        %}
+	            <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+        	{% endstylesheets %}
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
@@ -50,14 +53,14 @@
 			      			{% if app.user %}
 				        		<li class="dropdown user-menu">
 				          			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-				          				<i class="fa fa-user-circle"></i> {{ app.user }}
+				          				{{ icon('user-circle') }} {{ app.user }}
 				          				<span class="caret"></span>
 				          			</a>
 						          	<ul class="dropdown-menu">
 							            {% include sonata_admin.adminPool.getTemplate('user_block') %}
 						        	</ul>
 			      			{% else %}
-			        			<li><a href="{{ path('sonata_user_security_login') }}"><i class="fa fa-user-circle"></i> Connexion</a></li>
+			        			<li><a href="{{ path('sonata_user_security_login') }}">{{ icon('user-circle') }} Connexion</a></li>
 			      			{% endif %}
 			        		</li>
 			      		</ul>
@@ -68,12 +71,17 @@
     
         {% block body %}{% endblock %}
         
-        {% javascripts 
-            '@jquery' 
-            '@bootstrap_js' 
-            output='scripts.min.js' 
-        %}
-            <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
+        {% block javascripts %}
+	        {% javascripts 
+	            '@jquery' 
+	            '@bootstrap_js' 
+	            '@MopaBootstrapBundle/Resources/public/components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.js'
+				'@MopaBootstrapBundle/Resources/public/components/smalot-bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.fr.js'
+				'js/mopabootstrap-datepicker.js'
+	            output='scripts.min.js' 
+	        %}
+	            <script type="text/javascript" src="{{ asset_url }}"></script>
+	        {% endjavascripts %}
+        {% endblock %}
     </body>
 </html>

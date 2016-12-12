@@ -38,6 +38,10 @@ class AppKernel extends Kernel
             new Sonata\IntlBundle\SonataIntlBundle(),
             new Sonata\ClassificationBundle\SonataClassificationBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+        		
+        	// Ajout de champs de formulaires supplémentaires et intégration avec Twitter Bootstrap
+        	new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+        	new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
 
             // Nos bundles :
             // Bundle par défaut, contenant la majorité de nos pages

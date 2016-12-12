@@ -30,7 +30,10 @@
         "sonata-project/media-bundle": "^3.0",
         "FortAwesome/Font-Awesome": "^4.7",
         "twbs/bootstrap": "^3.3",
-        "symfony/assetic-bundle": "^2.8"
+        "symfony/assetic-bundle": "^2.8",
+        "genemu/form-bundle": "^3.0@dev",
+        "mopa/bootstrap-bundle": "^3.1",
+        "components/jqueryui": "^1.12"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "~2.7"
