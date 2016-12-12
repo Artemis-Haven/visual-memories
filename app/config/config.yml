@@ -4,6 +4,7 @@ imports:
     - { resource: services.yml }
     - { resource: external/fos.yml }
     - { resource: external/sonata.yml }
+    - { resource: external/assetic.yml }
 
 
 # Put parameters here that don't need to change on each machine where the app is deployed
@@ -71,63 +72,6 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-
-# Assetic Configuration
-assetic:
-    debug:          %kernel.debug%
-    use_controller: %kernel.debug%
-    write_to:       %kernel.root_dir%/../web/assetic/
-    filters:
-        cssrewrite: ~
-    assets:
-        jquery:
-            inputs:
-                - %kernel.root_dir%/../vendor/components/jquery/jquery.min.js
-                - %kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js
-        bootstrap_css:
-            inputs:
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css
-        bootstrap_js:
-            inputs:
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js
-        fontawesome_css:
-            inputs:
-                - %kernel.root_dir%/../vendor/fortawesome/font-awesome/css/font-awesome.min.css
-        font-awesome-otf:
-            inputs: '%kernel.root_dir%/../vendor/fortawesome/font-awesome/fonts/FontAwesome.otf'
-            output: 'fonts/FontAwesome.otf'
-        font-awesome-eot:
-            inputs: '%kernel.root_dir%/../vendor/fortawesome/font-awesome/fonts/fontawesome-webfont.eot'
-            output: 'fonts/fontawesome-webfont.eot'
-        font-awesome-svg:
-            inputs: '%kernel.root_dir%/../vendor/fortawesome/font-awesome/fonts/fontawesome-webfont.svg'
-            output: 'fonts/fontawesome-webfont.svg'
-        font-awesome-ttf:
-            inputs: '%kernel.root_dir%/../vendor/fortawesome/font-awesome/fonts/fontawesome-webfont.ttf'
-            output: 'fonts/fontawesome-webfont.ttf'
-        font-awesome-woff:
-            inputs: '%kernel.root_dir%/../vendor/fortawesome/font-awesome/fonts/fontawesome-webfont.woff'
-            output: 'fonts/fontawesome-webfont.woff'
-        glyphicons-eot:
-            inputs: '%kernel.root_dir%/../vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.eot'
-            output: 'fonts/glyphicons-halflings-regular.eot'
-        glyphicons-svg:
-            inputs: '%kernel.root_dir%/../vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.svg'
-            output: 'fonts/glyphicons-halflings-regular.svg'
-        glyphicons-ttf:
-            inputs: '%kernel.root_dir%/../vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.ttf'
-            output: 'fonts/glyphicons-halflings-regular.ttf'
-        glyphicons-woff:
-            inputs: '%kernel.root_dir%/../vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.woff'
-            output: 'fonts/glyphicons-halflings-regular.woff'
-        select2_css:
-            inputs:
-                - %kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css
-        select2_js:
-            inputs:
-                - %kernel.root_dir%/../vendor/select2/select2/dist/js/select2.min.js
 
 mopa_bootstrap:
     icons:
