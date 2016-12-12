@@ -33,7 +33,8 @@
         "symfony/assetic-bundle": "^2.8",
         "genemu/form-bundle": "^3.0@dev",
         "mopa/bootstrap-bundle": "^3.1",
-        "components/jqueryui": "^1.12"
+        "components/jqueryui": "^1.12",
+        "select2/select2": "^4.0"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "~2.7"

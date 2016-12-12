@@ -122,6 +122,12 @@ assetic:
         glyphicons-woff:
             inputs: '%kernel.root_dir%/../vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.woff'
             output: 'fonts/glyphicons-halflings-regular.woff'
+        select2_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css
+        select2_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/select2/select2/dist/js/select2.min.js
 
 mopa_bootstrap:
     icons:
@@ -129,3 +135,6 @@ mopa_bootstrap:
     form: # Adds twig form theme  support
         show_legend: false
     #menu: ~  # enables twig helpers for menu
+
+genemu_form:
+    select2: ~

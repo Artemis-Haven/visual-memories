@@ -116,6 +116,13 @@ class Person
      * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", cascade={"persist"})
      */
 	private $gallery;
+	
+	/**
+	 * @var ArrayCollection|Event[]
+	 * 
+ 	 * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Event", cascade={"persist"}, mappedBy="persons")
+	 */
+	private $events;
     
     
     
@@ -125,6 +132,7 @@ class Person
     	$this->parentsRelationships = new ArrayCollection();
     	$this->firstCoupleRelationships = new ArrayCollection();
     	$this->secondCoupleRelationships = new ArrayCollection();
+    	$this->events = new ArrayCollection();
     }
     
     public function __toString()
@@ -503,6 +511,45 @@ class Person
     public function getGallery()
     {
         return $this->gallery;
+    }
+
+    /**
+     * Add event
+     *
+     * @param Event $event
+     * @return Person
+     */
+    public function addEvent(Event $event = null)
+    {
+        $this->events->add(event);
+        $event->addPerson($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove event
+     *
+     * @param Event $event
+     * @return Person
+     */
+    public function removeEvent(Event $event = null)
+    {
+    	if ($this->events->contains($event)) {
+    		$this->events->removeElement($event);
+    		$event->removePerson($this);
+    	}
+        return $this;
+    }
+
+    /**
+     * Get events
+     *
+     * @return ArrayCollection|Event[]
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }
 

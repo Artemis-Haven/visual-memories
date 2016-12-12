@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<h3>Evénement : {{ event }}</h3>
+<h3>Evénement : {{ event }} <small><a href="{{ path('event_edit', {'id': event.id}) }}">Editer</a></small></h3>
 
 <table class="table table-bordered table-striped">
 	<tr>
@@ -15,7 +15,7 @@
 	</tr>
 	<tr>
 		<th>Lieu</th>
-		<td>{{ event.place }} {{ event.place is defined and event.place.country ? '('~event.place.country~')' }}</td>
+		<td>{{ event.place }} {{ event.place and event.place.country ? '('~event.place.country~')' }}</td>
 	</tr>
 </table>
 

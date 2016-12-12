@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Application\Sonata\MediaBundle\Entity\Gallery;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Event
@@ -64,7 +65,20 @@ class Event
      * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", cascade={"persist"})
      */
 	private $gallery;
+	
+	/**
+	 * @var ArrayCollection|Person[]
+	 * 
+ 	 * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", cascade={"persist"}, inversedBy="events")
+	 * @ORM\JoinTable()
+	 */
+	private $persons;
     
+    
+    public function __construct()
+    {
+    	$this->persons = new ArrayCollection();
+    }
     
     /**
      * Ex. 1 : "Fête des Vendanges"
@@ -75,7 +89,7 @@ class Event
     {
     	$str = $this->name;
     	if ($this->startDate) {
-    		$str .= '('.$this->startDate->format('d/m/Y');
+    		$str .= ' ('.$this->startDate->format('d/m/Y');
 	    	if ($this->endDate)
 	    		$str .= ' - '.$this->endDate->format('d/m/Y');
 	    	$str .= ')';
@@ -237,6 +251,45 @@ class Event
     public function getGallery()
     {
         return $this->gallery;
+    }
+
+    /**
+     * Add person
+     *
+     * @param Person $person
+     * @return Event
+     */
+    public function addPerson(Person $person = null)
+    {
+        $this->persons->add(person);
+        $person->addEvent($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove person
+     *
+     * @param Person $person
+     * @return Event
+     */
+    public function removePerson(Person $person = null)
+    {
+    	if ($this->persons->contains($person)) {
+    		$this->persons->removeElement($person);
+    		$person->removeEvent($this);
+    	}
+        return $this;
+    }
+
+    /**
+     * Get persons
+     *
+     * @return ArrayCollection|Person[]
+     */
+    public function getPersons()
+    {
+        return $this->persons;
     }
 }
 
