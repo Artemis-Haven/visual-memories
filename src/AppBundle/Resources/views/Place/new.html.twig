@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+	{{ form_stylesheet(form) }}
+{% endblock %}
+
+{% block body %}
+
+<h3>Ajouter un nouveau lieu</h3>
+
+{{ form(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+	{{ form_javascript(form) }}
+{% endblock %}

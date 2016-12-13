@@ -35,7 +35,7 @@
             	{% else %}
             		<li class="text-muted">Aucun lieu saisi</li>
             	{% endfor %}
-            	<li>{{ icon('plus') }} Nouveau lieux</li>
+            	<li><a href="{{ path('place_new') }}">{{ icon('plus') }} Nouveau lieux</a></li>
             </ul>
         </div>
     </div>
