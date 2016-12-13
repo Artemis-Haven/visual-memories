@@ -1,0 +1,20 @@
+<h3>
+	{{ title is defined ? title : gallery }} 
+	<small><a href="{{ path('gallery_edit', {'id': gallery.id}) }}">Editer</a></small>
+</h3>
+
+<div class="text-muted">{{ gallery.galleryHasMedias|length }} photo(s)</div>
+
+{% for item in gallery.galleryHasMedias[:10] %}
+	<a href="{% path item.media, 'reference' %}" target="__blank">
+    	{% thumbnail item.media, 'small' with {'class': 'img-thumbnail'} %}
+    </a>
+{% else %}
+	<div class="text-muted">Cette galerie ne contient aucune image</div>
+{% endfor %}
+
+{% if gallery.galleryHasMedias|length > 10 %}
+	<a href="{{ path('gallery_show', {'id': gallery.id}) }}">{{ icon('th') }} Voir toutes les photos</a>
+{% endif %}
+
+<a href="{{ path('gallery_add_photos', {'id': gallery.id}) }}">{{ icon('plus') }} Ajouter des photos</a>

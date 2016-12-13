@@ -12,5 +12,8 @@
 <div class="text-muted">Cette galerie ne contient aucune image</div>
 {% endfor %}
 
+<br />
+
+<a href="{{ path('gallery_add_photos', {'id': gallery.id}) }}">{{ icon('plus') }} Ajouter des photos</a>
 
 {% endblock %}
