@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+	{{ form_stylesheet(form) }}
+	{{ form_stylesheet(form.galleryHasMedias.vars.prototype) }}
+{% endblock %}
+
+{% block body %}
+
+<h3>Gérer les photos de la galerie : {{ gallery }}</h3>
+
+{{ form(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+	{{ form_javascript(form) }}
+{% endblock %}

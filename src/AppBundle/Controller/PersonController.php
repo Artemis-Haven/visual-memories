@@ -10,6 +10,7 @@ use AppBundle\Form\PersonType;
 use Application\Sonata\MediaBundle\Entity\Gallery;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Application\Sonata\MediaBundle\Form\GalleryType;
 
 /**
  * Contrôleur gérant les pages liées à l'entité Person : création, consultation, modification, suppression
@@ -46,7 +47,7 @@ class PersonController extends Controller
     	if ($form->isValid()) {
     		$em = $this->getDoctrine()->getManager();
     		$gallery = new Gallery();
-    		$gallery->setName('Gallerie de '.$person->getFirstName().' '.$person->getLastName());
+    		$gallery->setName('Galerie de '.$person->getFirstName().' '.$person->getLastName());
     		$gallery->setContext('person');
     		$gallery->setDefaultFormat('');
     		$gallery->setEnabled(true);
@@ -66,7 +67,7 @@ class PersonController extends Controller
     }
     
     /**
-     * @Route("/edit-{id}", name="person_edit")
+     * @Route("/edit-{id}", name="person_edit", requirements={"id"="\d+"})
 	 * @ParamConverter("person", class="AppBundle:Person")
 	 * @Template()
      */

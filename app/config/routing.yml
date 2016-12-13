@@ -1,5 +1,9 @@
-app:
+app_bundle:
     resource: "@AppBundle/Controller/"
+    type:     annotation
+
+media_bundle:
+    resource: "@ApplicationSonataMediaBundle/Controller/"
     type:     annotation
 
 #Sonata
