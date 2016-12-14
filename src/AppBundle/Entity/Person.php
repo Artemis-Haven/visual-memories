@@ -488,6 +488,29 @@ class Person
     {
         return $this->parentsRelationships;
     }
+    
+    public function getParents()
+    {
+    	$parents = [];
+    	foreach ($this->getParentsRelationships() as $rel) {
+    			$parents[] = $rel->getParent();
+    	}
+    	
+    	return $parents;
+    }
+    
+    public function getSiblings()
+    {
+    	$siblings = [];
+    	foreach ($this->getParentsRelationships() as $parentRel) {
+    		foreach ($parentRel->getParent()->getChildrenRelationships() as $childRel) {
+    			if ($childRel->getChild() != $this && !in_array($childRel->getChild(), $siblings))
+    				$siblings[] = $childRel->getChild();
+    		}
+    	}
+    	
+    	return $siblings;
+    }
 
     /**
      * Set gallery

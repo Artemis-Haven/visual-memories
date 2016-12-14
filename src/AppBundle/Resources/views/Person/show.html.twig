@@ -71,44 +71,52 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% if person.parentsRelationships is not empty %}
-					{% for rel in person.parentsRelationships %}
-						<tr>
-							{% if loop.first %}
-								<th rowspan="{{ person.parentsRelationships|length }}">Parents</th>
-							{% endif %}
-							<td>
-							    <a href="{{ path('person_show', {'id': rel.parent.id}) }}">{{ rel.parent }}</a>
-							    <a class="pull-right confirmDeletion" title="Supprimer" href="{{ path('person_remove_parent_relation', {'id': rel.id}) }}">{{ icon('times') }}</a>
-							</td>
-						</tr>
-					{% endfor %}
-				{% endif %}
-				{% if person.coupleRelationships is not empty %}
-					{% for rel in person.coupleRelationships %}
+				{% for rel in person.parentsRelationships %}
 					<tr>
-						<th>{{ rel.type }}</th>
+						{% if loop.first %}
+							<th rowspan="{{ person.parentsRelationships|length }}">Parents</th>
+						{% endif %}
 						<td>
-							{% set otherPerson = (rel.person1 == person ? rel.person2 : rel.person1) %}
-						    <a href="{{ path('person_show', {'id': otherPerson.id}) }}">{{ otherPerson }}</a>
-							<a class="pull-right confirmDeletion" title="Supprimer" href="{{ path('person_remove_couple_relation', {'id': rel.id}) }}">{{ icon('times') }}</a>
+						    <a href="{{ path('person_show', {'id': rel.parent.id}) }}">{{ rel.parent }}</a>
+						    <a class="pull-right confirmDeletion" title="Supprimer" href="{{ path('person_remove_parent_relation', {'id': rel.id}) }}">{{ icon('times') }}</a>
 						</td>
 					</tr>
-					{% endfor %}
-				{% endif %}
-				{% if person.parentsRelationships is not empty %}
-					{% for rel in person.childrenRelationships %}
-						<tr>
-							{% if loop.first %}
-								<th rowspan="{{ person.childrenRelationships|length }}">Enfants</th>
-							{% endif %}
-							<td>
-							    <a href="{{ path('person_show', {'id': rel.child.id}) }}">{{ rel.child }}</a>
-							    <a class="pull-right confirmDeletion" title="Supprimer" href="{{ path('person_remove_parent_relation', {'id': rel.id}) }}">{{ icon('times') }}</a>
-							</td>
-						</tr>
-					{% endfor %}
-				{% endif %}
+				{% endfor %}
+				
+				{% for sibling in person.siblings %}
+					<tr>
+						{% if loop.first %}
+							<th rowspan="{{ person.siblings|length }}">Frères et soeurs</th>
+						{% endif %}
+						<td>
+						    <a href="{{ path('person_show', {'id': sibling.id}) }}">{{ sibling }}</a>
+						</td>
+					</tr>
+				{% endfor %}
+				
+				{% for rel in person.coupleRelationships %}
+				<tr>
+					<th>{{ rel.type }}</th>
+					<td>
+						{% set otherPerson = (rel.person1 == person ? rel.person2 : rel.person1) %}
+					    <a href="{{ path('person_show', {'id': otherPerson.id}) }}">{{ otherPerson }}</a>
+						<a class="pull-right confirmDeletion" title="Supprimer" href="{{ path('person_remove_couple_relation', {'id': rel.id}) }}">{{ icon('times') }}</a>
+					</td>
+				</tr>
+				{% endfor %}
+				
+				{% for rel in person.childrenRelationships %}
+					<tr>
+						{% if loop.first %}
+							<th rowspan="{{ person.childrenRelationships|length }}">Enfants</th>
+						{% endif %}
+						<td>
+						    <a href="{{ path('person_show', {'id': rel.child.id}) }}">{{ rel.child }}</a>
+						    <a class="pull-right confirmDeletion" title="Supprimer" href="{{ path('person_remove_parent_relation', {'id': rel.id}) }}">{{ icon('times') }}</a>
+						</td>
+					</tr>
+				{% endfor %}
+				
 				<tr>
 					<th colspan="2">
 						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#newRelationModal">
