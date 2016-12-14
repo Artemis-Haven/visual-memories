@@ -31,11 +31,11 @@
             <h3>Lieux</h3>
             <ul>
             	{% for place in places %}
-            	    <li>{{ icon('place') }} {{ place }}</li>
+            	    <li><a href="{{ path('place_show', {'id': place.id}) }}">{{ icon('map-marker') }} {{ place }}</a></li>
             	{% else %}
             		<li class="text-muted">Aucun lieu saisi</li>
             	{% endfor %}
-            	<li><a href="{{ path('place_new') }}">{{ icon('plus') }} Nouveau lieux</a></li>
+            	<li><a href="{{ path('place_new') }}">{{ icon('plus') }} Nouveau lieu</a></li>
             </ul>
         </div>
     </div>

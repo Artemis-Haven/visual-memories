@@ -1,26 +1,167 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+	{{ form_stylesheet(newRelationForm) }}
+{% endblock %}
+
 {% block body %}
 
 <h3>Personne : {{ person }} <small><a href="{{ path('person_edit', {'id': person.id}) }}">Editer</a></small></h3>
 
-<table class="table table-bordered table-striped">
-	<tr>
-		<th>Nom</th>
-		<td>{{ person }}</td>
-	</tr>
-	<tr>
-		<th>Date de naissance</th>
-		<td>{{ person.birthDate ? person.birthDate|date('d/m/Y') : 'Non renseignée' }}</td>
-	</tr>
-	<tr>
-		<th>Notes</th>
-		<td>{{ person.notes }}</td>
-	</tr>
-</table>
+<div class="row">
+	<div class="col-md-8">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th colspan="2">Informations personnelles</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Prénom</th>
+					<td>{{ person.firstName }}</td>
+				</tr>
+				{% if person.middleName %}
+				<tr>
+					<th>Autres prénoms</th>
+					<td>{{ person.middleName }}</td>
+				</tr>
+				{% endif %}
+				{% if person.maidenName %}
+				<tr>
+					<th>Nom de naissance</th>
+					<td>{{ person.maidenName }}</td>
+				</tr>
+				{% endif %}
+				<tr>
+					<th>Nom de famille</th>
+					<td>{{ person.lastName }}</td>
+				</tr>
+				{% if person.gender %}
+				<tr>
+					<th>Sexe</th>
+					<td>{{ person.gender }}</td>
+				</tr>
+				{% endif %}
+				<tr>
+					<th>Date de naissance</th>
+					<td>{{ person.birthDate ? person.birthDate|date('d/m/Y') : 'Non renseignée' }}</td>
+				</tr>
+				{% if person.deathDate %}
+				<tr>
+					<th>Date de décès</th>
+					<td>{{ person.deathDate|date('d/m/Y') }}</td>
+				</tr>
+				{% endif %}
+				{% if person.notes %}
+				<tr>
+					<th>Notes</th>
+					<td>{{ person.notes|nl2br }}</td>
+				</tr>
+				{% endif %}
+			</tbody>
+		</table>
+	</div>
+	<div class="col-md-4">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th colspan="2">Relations</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if person.parentsRelationships is not empty %}
+					{% for rel in person.parentsRelationships %}
+						<tr>
+							{% if loop.first %}
+								<th rowspan="{{ person.parentsRelationships|length }}">Parents</th>
+							{% endif %}
+							<td>
+							    <a href="{{ path('person_show', {'id': rel.parent.id}) }}">{{ rel.parent }}</a>
+							    <a class="pull-right confirmDeletion" title="Supprimer" href="{{ path('person_remove_parent_relation', {'id': rel.id}) }}">{{ icon('times') }}</a>
+							</td>
+						</tr>
+					{% endfor %}
+				{% endif %}
+				{% if person.coupleRelationships is not empty %}
+					{% for rel in person.coupleRelationships %}
+					<tr>
+						<th>{{ rel.type }}</th>
+						<td>
+							{% set otherPerson = (rel.person1 == person ? rel.person2 : rel.person1) %}
+						    <a href="{{ path('person_show', {'id': otherPerson.id}) }}">{{ otherPerson }}</a>
+							<a class="pull-right confirmDeletion" title="Supprimer" href="{{ path('person_remove_couple_relation', {'id': rel.id}) }}">{{ icon('times') }}</a>
+						</td>
+					</tr>
+					{% endfor %}
+				{% endif %}
+				{% if person.parentsRelationships is not empty %}
+					{% for rel in person.childrenRelationships %}
+						<tr>
+							{% if loop.first %}
+								<th rowspan="{{ person.childrenRelationships|length }}">Enfants</th>
+							{% endif %}
+							<td>
+							    <a href="{{ path('person_show', {'id': rel.child.id}) }}">{{ rel.child }}</a>
+							    <a class="pull-right confirmDeletion" title="Supprimer" href="{{ path('person_remove_parent_relation', {'id': rel.id}) }}">{{ icon('times') }}</a>
+							</td>
+						</tr>
+					{% endfor %}
+				{% endif %}
+				<tr>
+					<th colspan="2">
+						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#newRelationModal">
+							{{ icon('plus') }} Ajouter une relation
+						</button>
+					</th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="modal fade" id="newRelationModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			{{ form_start(newRelationForm) }}
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+        		<h4 class="modal-title" id="newRelationModalLabel">Ajouter une relation</h4>
+			</div>
+			<div class="modal-body">
+				{{ form_row(newRelationForm.relation) }}
+				{{ form_row(newRelationForm.person) }}
+				{{ form_row(newRelationForm.coupleType) }}
+			</div>
+			<div class="modal-footer">
+				{{ form_widget(newRelationForm.submit, {'attr': {'class': 'btn-success'}}) }}
+			</div>
+			{{ form_end(newRelationForm) }}
+		</div>
+	</div>
+</div>
 
 <hr />
 
 {% include 'ApplicationSonataMediaBundle:Gallery:preview.html.twig' with {'gallery': person.gallery, 'title': "Galerie de photos"} %}
 
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+	{{ form_javascript(newRelationForm) }}
+	<script>
+	    $('[id$=relation]').on('change', function() {
+		    if ( $(this).val() == 'couple' ) {
+	    		$('[id$=coupleType]').closest('.form-group').show();
+		    } else {
+	    		$('[id$=coupleType]').val('').closest('.form-group').hide();
+			}
+		}).change();
+	    $('.confirmDeletion').on('click', function() {
+		    if (!confirm("Etes-vous certain de vouloir supprimer cette relation ?")) return false;
+		});
+	</script>
 {% endblock %}

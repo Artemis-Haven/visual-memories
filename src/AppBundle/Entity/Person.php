@@ -37,15 +37,15 @@ class Person
      */
     private $deathDate;
     
-   	const SEX_MALE = "Homme";
-   	const SEX_FEMALE = "Femme";
+   	const GENDER_MALE = "Homme";
+   	const GENDER_FEMALE = "Femme";
 
     /**
      * @var string
      *
-     * @ORM\Column(name="sex", type="string", length=10, nullable=true)
+     * @ORM\Column(name="gender", type="string", length=10, nullable=true)
      */
-    private $sex;
+    private $gender;
 
     /**
      * @var string
@@ -201,28 +201,28 @@ class Person
     }
 
     /**
-     * Set sex
+     * Set gender
      *
-     * @param string $sex
+     * @param string $gender
      *
      * @return Person
      */
-    public function setSex($sex)
+    public function setGender($gender)
     {
-    	if ($sex == null || in_array($sex, [self::SEX_FEMALE, self::SEX_MALE]))
-	        $this->sex = $sex;
+    	if ($gender == null || in_array($gender, [self::GENDER_FEMALE, self::GENDER_MALE]))
+	        $this->gender = $gender;
 
         return $this;
     }
 
     /**
-     * Get sex
+     * Get gender
      *
      * @return string
      */
-    public function getSex()
+    public function getGender()
     {
-        return $this->sex;
+        return $this->gender;
     }
 
     /**
@@ -419,7 +419,7 @@ class Person
      */
     public function getCoupleRelationships()
     {
-        return array_merge($this->firstCoupleRelationships, $this->secondCoupleRelationships);
+        return new ArrayCollection(array_merge($this->firstCoupleRelationships->toArray(), $this->secondCoupleRelationships->toArray()));
     }
 
     /**

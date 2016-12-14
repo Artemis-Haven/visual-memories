@@ -16,23 +16,6 @@ class PersonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('birthDate', null, [
-            	'label' => "Date de naissance",
-            	'required' => false,
-	            'widget' => 'single_text',
-	            'datepicker' => true,
-            ])
-            ->add('deathDate', null, [
-            	'label' => "Date de décès",
-            	'required' => false,
-	            'widget' => 'single_text',
-	            'datepicker' => true,
-            ])
-            ->add('sex', 'choice', [
-            	'label' => "Sexe",
-            	'choices' => [Person::SEX_FEMALE => Person::SEX_FEMALE, Person::SEX_MALE => Person::SEX_MALE],
-            	'required' => false
-            ])
             ->add('firstName', 'text', [
             	'label' => "Prénom"
             ])
@@ -46,6 +29,25 @@ class PersonType extends AbstractType
             ])
             ->add('lastName', 'text', [
             	'label' => "Nom de famille"
+            ])
+            ->add('gender', 'choice', [
+            	'label' => "Sexe",
+            	'choices' => [Person::GENDER_FEMALE => Person::GENDER_FEMALE, Person::GENDER_MALE => Person::GENDER_MALE],
+            	'required' => false
+            ])
+            ->add('birthDate', null, [
+            	'label' => "Date de naissance",
+            	'required' => false,
+	            'widget' => 'single_text',
+	            'datepicker' => true,
+            	'widget_reset_icon' => true
+            ])
+            ->add('deathDate', null, [
+            	'label' => "Date de décès",
+            	'required' => false,
+	            'widget' => 'single_text',
+	            'datepicker' => true,
+            	'widget_reset_icon' => true
             ])
             ->add('notes', 'textarea', [
             	'label' => "Notes",
