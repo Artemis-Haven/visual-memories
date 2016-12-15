@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Application\Sonata\MediaBundle\Entity\GalleryHasMedia;
 use Application\Sonata\MediaBundle\Form\MediaType;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Contrôleur gérant les pages liées à l'entité Gallery : création, consultation, modification, suppression
@@ -100,6 +101,7 @@ class GalleryController extends Controller
 	    		$media->setContext(1);
 	    		$ghm->setMedia($media);
 	    		$ghm->setGallery($gallery);
+	    		$ghm->setPosition($gallery->getMaxPosition()+1);
 	    		$this->getDoctrine()->getManager()->persist($ghm);
 	    		$mediaManager->save($media);
 	    		$res['files'][] = [
@@ -186,28 +188,31 @@ class GalleryController extends Controller
     	if ($form->isValid()) {
     		$em = $this->getDoctrine()->getManager();
     		
-    		// Suppression de tous les liens entre le média et les galeries
+    		// Récupération des galeries correspondant aux personnes, à l'événement et au
+    		// lieu saisis dans le formulaire
+    		$newGalleries = new ArrayCollection();
+    		foreach ($form->get('persons')->getData() as $person) {
+    			$newGalleries[] = $person->getGallery();
+    		}
+    		if ($form->get('event')->getData())
+    			$newGalleries->add($form->get('event')->getData()->getGallery());
+    		if ($form->get('place')->getData())
+    			$newGalleries->add($form->get('place')->getData()->getGallery());
+    		
+    		// Suppression des liens entre le média et les galeries qui ne sont plus dans $newGalleries
     		foreach ($media->getGalleryHasMedias() as $galleryItem) {
-    			$em->remove($galleryItem);
+    			if ($newGalleries->contains($galleryItem->getGallery()))
+    				$newGalleries->removeElement($galleryItem->getGallery());
+	    		else
+    				$em->remove($galleryItem);
     		}
     		$em->flush();
-    		// (Re)création des liens entre le média et les galleries
-    		foreach ($form->get('persons')->getData() as $person) { /* @var Person $person */
+    		// Création des nouveaux liens entre le média et les galleries
+    		foreach ($newGalleries as $newGallery) {
     			$galleryItem = new GalleryHasMedia();
-    			$galleryItem->setGallery($person->getGallery());
+    			$galleryItem->setGallery($newGallery);
     			$galleryItem->setMedia($media);
-    			$em->persist($galleryItem);
-    		}
-    		if ($form->get('event')->getData()) {
-    			$galleryItem = new GalleryHasMedia();
-    			$galleryItem->setGallery($form->get('event')->getData()->getGallery());
-    			$galleryItem->setMedia($media);
-    			$em->persist($galleryItem);
-    		}
-    		if ($form->get('place')->getData()) {
-    			$galleryItem = new GalleryHasMedia();
-    			$galleryItem->setGallery($form->get('place')->getData()->getGallery());
-    			$galleryItem->setMedia($media);
+    			$galleryItem->setPosition($gallery->getMaxPosition()+1);
     			$em->persist($galleryItem);
     		}
     		
