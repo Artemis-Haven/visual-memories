@@ -40,7 +40,7 @@ class Place
     /**
      * @var Gallery
      * 
-     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", inversedBy="place", cascade={"persist"})
      */
 	private $gallery;
     

@@ -19,7 +19,21 @@
 {% block body %}
 
 <div class="container">
-	<h3><a href="{{ path('gallery_show', {'id': gallery.id}) }}">{{ gallery }}</a></h3>
+	<h3>
+		{% if gallery.person %}
+		    <a href="{{ path('person_show', {'id': gallery.person.id}) }}">{{ gallery.person }}</a> 
+		{% elseif gallery.place %}
+		    <a href="{{ path('place_show', {'id': gallery.place.id}) }}">{{ gallery.place }}</a> 
+		{% elseif gallery.event %}
+		    <a href="{{ path('event_show', {'id': gallery.event.id}) }}">{{ gallery.event }}</a> 
+		{% endif %}
+	    {{ icon('chevron-right small') }}
+	    <a href="{{ path('gallery_show', {'id': gallery.id}) }}">Galerie de photos</a>
+		{{ icon('chevron-right small') }}
+		{{ media }}
+		
+		<small><a href="{{ path('gallery_edit_media', {'galleryId': gallery.id, 'mediaId': media.id}) }}">Editer</a></small>
+	</h3>
 </div>
 
 <div class="container-fluid" id="media-container">

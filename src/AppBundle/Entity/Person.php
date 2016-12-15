@@ -113,7 +113,7 @@ class Person
     /**
      * @var Gallery
      * 
-     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", inversedBy="person", cascade={"persist"})
      */
 	private $gallery;
 	

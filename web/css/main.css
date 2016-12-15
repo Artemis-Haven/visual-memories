@@ -87,7 +87,11 @@ nav.navbar .user-footer {
 }
 
 #previous-media, #next-media {
-	display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
 	justify-content: center;
 	width: 100px !important;
 	position: relative;
@@ -105,6 +109,8 @@ nav.navbar .user-footer {
 	text-decoration: none;
 }
 #previous-media i.fa, #next-media i.fa {
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
 	align-self: center;
 }
 
@@ -122,4 +128,5 @@ nav.navbar .user-footer {
 	display: inline-block;
 	max-width: 100%;
 	margin: 0 auto;
+	padding: 20px;
 }

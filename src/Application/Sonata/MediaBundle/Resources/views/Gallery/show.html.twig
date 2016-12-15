@@ -2,7 +2,19 @@
 
 {% block body %}
 
-<h3>{{ gallery }} <small><a href="{{ path('gallery_edit', {'id': gallery.id}) }}">Editer</a></small></h3>
+<h3>
+	{% if gallery.person %}
+	    <a href="{{ path('person_show', {'id': gallery.person.id}) }}">{{ gallery.person }}</a> 
+	{% elseif gallery.place %}
+	    <a href="{{ path('place_show', {'id': gallery.place.id}) }}">{{ gallery.place }}</a> 
+	{% elseif gallery.event %}
+	    <a href="{{ path('event_show', {'id': gallery.event.id}) }}">{{ gallery.event }}</a> 
+	{% endif %}
+    {{ icon('chevron-right') }}
+    Galerie de photos
+	<small><a href="{{ path('gallery_edit', {'id': gallery.id}) }}">Editer</a></small>
+</h3>
+
 <div class="text-muted">{{ gallery.galleryHasMedias|length }} photo(s)</div>
 {% for item in gallery.galleryHasMedias %}
 	<a href="{{ path('gallery_show_media', {'galleryId': gallery.id, 'mediaId': item.media.id}) }}">
