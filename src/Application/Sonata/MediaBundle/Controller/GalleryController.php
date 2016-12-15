@@ -17,7 +17,7 @@ use Application\Sonata\MediaBundle\Entity\Media;
 use Application\Sonata\MediaBundle\Entity\GalleryHasMedia;
 
 /**
- * Contrôleur gérant les pages liées à l'entité Person : création, consultation, modification, suppression
+ * Contrôleur gérant les pages liées à l'entité Gallery : création, consultation, modification, suppression
  * 
  * @Route("/gallery")
  */
@@ -76,7 +76,7 @@ class GalleryController extends Controller
     }
    
     /**
-     * @Route("/file-upload-{id}", name="gallery_file_upload", requirements={"id"="\d+"})
+     * @Route("/upload-photos-{id}", name="gallery_file_upload", requirements={"id"="\d+"})
 	 * @ParamConverter("gallery", class="ApplicationSonataMediaBundle:Gallery")
 	 * @Method("POST")
      */
@@ -122,7 +122,7 @@ class GalleryController extends Controller
     }
    
     /**
-     * @Route("/file-delete-{id}", name="gallery_file_delete", requirements={"id"="\d+"})
+     * @Route("/delete-photos-{id}", name="gallery_file_delete", requirements={"id"="\d+"})
 	 * @ParamConverter("media", class="ApplicationSonataMediaBundle:Media")
 	 * @Method("DELETE")
      */
@@ -138,5 +138,19 @@ class GalleryController extends Controller
     	$res = ['files' => [$media->getName() => true]];
     	
         return new Response(json_encode($res));
+    }
+   
+    /**
+     * @Route("-{galleryId}/photo-{mediaId}", name="gallery_show_media", requirements={"galleryId"="\d+", "mediaId"="\d+"})
+	 * @ParamConverter("gallery", class="ApplicationSonataMediaBundle:Gallery", options={"id" = "galleryId"})
+	 * @ParamConverter("media", class="ApplicationSonataMediaBundle:Media", options={"id" = "mediaId"})
+	 * @Template()
+     */
+    public function showMediaInGalleryAction(Gallery $gallery, Media $media)
+    {
+    	return [
+    		'gallery' => $gallery,
+    		'media' => $media
+    	];
     }
 }

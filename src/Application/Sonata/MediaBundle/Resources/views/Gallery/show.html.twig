@@ -5,7 +5,7 @@
 <h3>{{ gallery }} <small><a href="{{ path('gallery_edit', {'id': gallery.id}) }}">Editer</a></small></h3>
 <div class="text-muted">{{ gallery.galleryHasMedias|length }} photo(s)</div>
 {% for item in gallery.galleryHasMedias %}
-	<a href="{% path item.media, 'reference' %}" target="__blank">
+	<a href="{{ path('gallery_show_media', {'galleryId': gallery.id, 'mediaId': item.media.id}) }}">
     	{% thumbnail item.media, 'small' with {'class': 'img-thumbnail'} %}
     </a>
 {% else %}

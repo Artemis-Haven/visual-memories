@@ -46,4 +46,80 @@ nav.navbar .user-footer {
 }
 
 
+/* Media container : La zone de présentation d'une photo en grand format */
 
+#media-container {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    
+	background-color: #444444;
+	-webkit-box-shadow:inset 0 0 8px 1px #000000;
+	box-shadow:inset 0 0 8px 1px #000000;
+	padding: 0;
+}
+
+#media-container > * {
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+}
+
+#previous-media, #next-media {
+	display: flex;
+	justify-content: center;
+	width: 100px !important;
+	position: relative;
+	top: 0px;
+	min-height: 240px;
+    z-index: 20;
+	
+	color: #F0F0F0;
+	text-align: center;
+	font-size: 35px;
+}
+#previous-media:hover, #next-media:hover {
+	background: rgba(75, 75, 75, 0.2);
+	color: #777777;
+	text-decoration: none;
+}
+#previous-media i.fa, #next-media i.fa {
+	align-self: center;
+}
+
+#media-container > div {
+    -webkit-flex: 12 1 auto;
+    -ms-flex: 12 1 auto;
+    flex: 12 1 auto;
+    margin: 0 -100px;
+	max-width: 100%;
+    z-index: 10;
+	text-align: center;
+}
+
+#media-container > div > img {
+	display: inline-block;
+	max-width: 100%;
+	margin: 0 auto;
+}

@@ -6,7 +6,7 @@
 <div class="text-muted">{{ gallery.galleryHasMedias|length }} photo(s)</div>
 
 {% for item in gallery.galleryHasMedias[:10] %}
-	<a href="{% path item.media, 'reference' %}" target="__blank">
+	<a href="{{ path('gallery_show_media', {'galleryId': gallery.id, 'mediaId': item.media.id}) }}">
     	{% thumbnail item.media, 'small' with {'class': 'img-thumbnail'} %}
     </a>
 {% else %}

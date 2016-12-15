@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}  {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+	<style>
+		xx#media-container > .img {
+			background-image: url({% path media, 'reference' %});
+			height: {{ media.height }}px;
+		}
+		xx#previous-media, xx#next-media {
+			height: {{ media.height + 40}}px;
+		}
+	</style>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container">
+	<h3><a href="{{ path('gallery_show', {'id': gallery.id}) }}">{{ gallery }}</a></h3>
+</div>
+
+<div class="container-fluid" id="media-container">
+	{# media media, 'reference' with {'class': 'img-thumbnail'} #}
+	<a href="#" id="previous-media">{{ icon('chevron-left') }}</a>
+	<div>
+		<img alt="{{ media.name }}" title="{{ media.name }}" src="{% path media, 'reference' %}">
+	</div>
+	<a href="#" id="next-media">{{ icon('chevron-right') }}</a>
+	
+</div>
+
+<div class="container">
+	{{ dump(media) }}
+</div>
+
+{% endblock %}
