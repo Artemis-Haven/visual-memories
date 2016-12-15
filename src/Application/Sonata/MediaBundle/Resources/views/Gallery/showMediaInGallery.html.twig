@@ -2,6 +2,9 @@
 
 {% block container %}  {% endblock %}
 
+{% set gallery = galleryHasMedia.gallery %}
+{% set media = galleryHasMedia.media %}
+
 {% block stylesheets %}
     {{ parent() }}
 	<style>
@@ -32,22 +35,43 @@
 		{{ icon('chevron-right small') }}
 		{{ media }}
 		
-		<small><a href="{{ path('gallery_edit_media', {'galleryId': gallery.id, 'mediaId': media.id}) }}">Editer</a></small>
+		<small><a href="{{ path('gallery_edit_media', {'id': galleryHasMedia.id}) }}">Editer</a></small>
 	</h3>
 </div>
 
 <div class="container-fluid" id="media-container">
-	{# media media, 'reference' with {'class': 'img-thumbnail'} #}
-	<a href="#" id="previous-media">{{ icon('chevron-left') }}</a>
+	{% if galleryHasMedia.prev %}
+		<a href="{{ path('gallery_show_media', {'id': galleryHasMedia.prev.id}) }}" id="previous-media">{{ icon('chevron-left') }}</a>
+	{% else %}
+		<span id="previous-media"></span>
+	{% endif %}
 	<div>
 		<img alt="{{ media.name }}" title="{{ media.name }}" src="{% path media, 'reference' %}">
 	</div>
-	<a href="#" id="next-media">{{ icon('chevron-right') }}</a>
+	{% if galleryHasMedia.next %}
+		<a href="{{ path('gallery_show_media', {'id': galleryHasMedia.next.id}) }}" id="next-media">{{ icon('chevron-right') }}</a>
+	{% else %}
+		<span id="next-media"></span>
+	{% endif %}
 	
 </div>
 
 <div class="container">
-	{{ dump(media) }}
+	<table class="table">
+		<tr><td><b>Nom : </b> {{ media.name }}</td></tr>
+		{% if media.description %}
+			<tr><td><b>Description : </b> {{ media.description }}</td></tr>
+		{% endif %}
+		{% if media.place %}
+			<tr><td><b>Lieu : </b> {{ media.place }}</td></tr>
+		{% endif %}
+		{% if media.event %}
+			<tr><td><b>Evénement : </b> {{ media.event }}</td></tr>
+		{% endif %}
+		{% if media.persons is not empty %}
+			<tr><td><b>Personnes : </b> {{ media.persons|join(', ') }}</td></tr>
+		{% endif %}
+	</table>
 </div>
 
 {% endblock %}

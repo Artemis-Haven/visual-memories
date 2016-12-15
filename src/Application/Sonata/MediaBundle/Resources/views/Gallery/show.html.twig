@@ -17,7 +17,7 @@
 
 <div class="text-muted">{{ gallery.galleryHasMedias|length }} photo(s)</div>
 {% for item in gallery.galleryHasMedias %}
-	<a href="{{ path('gallery_show_media', {'galleryId': gallery.id, 'mediaId': item.media.id}) }}">
+	<a href="{{ path('gallery_show_media', {'id': item.id}) }}">
     	{% thumbnail item.media, 'small' with {'class': 'img-thumbnail'} %}
     </a>
 {% else %}

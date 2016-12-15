@@ -121,4 +121,14 @@ class Gallery extends BaseGallery
     	$this->place = $place;
     	return $this;
     }
+    
+    public function getMaxPosition()
+    {
+    	$max = 0;
+    	foreach ($this->galleryHasMedias as $item) {
+    		if ($item->getPosition() > $max)
+    			$max = $item->getPosition();
+    	}
+    	return $max;
+    }
 }

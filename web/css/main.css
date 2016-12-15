@@ -103,7 +103,7 @@ nav.navbar .user-footer {
 	text-align: center;
 	font-size: 35px;
 }
-#previous-media:hover, #next-media:hover {
+a#previous-media:hover, a#next-media:hover {
 	background: rgba(75, 75, 75, 0.2);
 	color: #777777;
 	text-decoration: none;

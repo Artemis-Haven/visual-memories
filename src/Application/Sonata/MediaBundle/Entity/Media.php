@@ -30,4 +30,30 @@ class Media extends BaseMedia
     {
         return $this->id;
     }
+    
+    public function getPersons()
+    {
+    	$persons = [];
+    	foreach ($this->getGalleryHasMedias() as $galleryItem) {
+    		if ($galleryItem->getGallery()->getPerson())
+    			$persons[] = $galleryItem->getGallery()->getPerson();
+    	}
+    	return $persons;
+    }
+    
+    public function getEvent()
+    {
+    	foreach ($this->getGalleryHasMedias() as $galleryItem) {
+    		if ($galleryItem->getGallery()->getEvent())
+    			return $galleryItem->getGallery()->getEvent();
+    	}
+    }
+    
+    public function getPlace()
+    {
+    	foreach ($this->getGalleryHasMedias() as $galleryItem) {
+    		if ($galleryItem->getGallery()->getPlace())
+    			return $galleryItem->getGallery()->getPlace();
+    	}
+    }
 }

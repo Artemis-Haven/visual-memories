@@ -7,6 +7,9 @@
 
 {% block body %}
 
+{% set gallery = galleryHasMedia.gallery %}
+{% set media = galleryHasMedia.media %}
+
 <h3>Modifier les informations de la photo : {{ media }}</h3>
 
 {{ form(form) }}

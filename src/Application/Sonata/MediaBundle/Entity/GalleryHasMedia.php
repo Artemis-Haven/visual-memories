@@ -30,4 +30,24 @@ class GalleryHasMedia extends BaseGalleryHasMedia
     {
         return $this->id;
     }
+    
+    public function prev()
+    {
+    	$prev = null;
+    	foreach ($this->gallery->getGalleryHasMedias() as $item) {
+    		if ($item != $this && $item->getPosition() > $this->position && ($prev == null || $prev->getPosition() > $item->getPosition()))
+    			$prev = $item;
+    	}
+    	return $prev;
+    }
+    
+    public function next()
+    {
+    	$next = null;
+    	foreach ($this->gallery->getGalleryHasMedias() as $item) {
+    		if ($item != $this && $item->getPosition() < $this->position && ($next == null || $next->getPosition() < $item->getPosition()))
+    			$next = $item;
+    	}
+    	return $next;
+    }
 }

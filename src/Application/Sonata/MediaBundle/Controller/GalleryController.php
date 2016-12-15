@@ -144,27 +144,27 @@ class GalleryController extends Controller
     }
    
     /**
-     * @Route("-{galleryId}/photo-{mediaId}", name="gallery_show_media", requirements={"galleryId"="\d+", "mediaId"="\d+"})
-	 * @ParamConverter("gallery", class="ApplicationSonataMediaBundle:Gallery", options={"id" = "galleryId"})
-	 * @ParamConverter("media", class="ApplicationSonataMediaBundle:Media", options={"id" = "mediaId"})
+     * @Route("/photo-{id}", name="gallery_show_media", requirements={"id"="\d+"})
+	 * @ParamConverter("galleryItem", class="ApplicationSonataMediaBundle:GalleryHasMedia")
 	 * @Template()
      */
-    public function showMediaInGalleryAction(Gallery $gallery, Media $media)
+    public function showMediaInGalleryAction(GalleryHasMedia $galleryHasMedia)
     {
+    	
     	return [
-    		'gallery' => $gallery,
-    		'media' => $media
+    		'galleryHasMedia' => $galleryHasMedia,
     	];
     }
    
     /**
-     * @Route("-{galleryId}/edit-photo-{mediaId}", name="gallery_edit_media", requirements={"galleryId"="\d+", "mediaId"="\d+"})
-	 * @ParamConverter("gallery", class="ApplicationSonataMediaBundle:Gallery", options={"id" = "galleryId"})
-	 * @ParamConverter("media", class="ApplicationSonataMediaBundle:Media", options={"id" = "mediaId"})
+     * @Route("/edit-photo-{id}", name="gallery_edit_media", requirements={"id"="\d+"})
+	 * @ParamConverter("galleryItem", class="ApplicationSonataMediaBundle:GalleryHasMedia")
 	 * @Template()
      */
-    public function editMediaInGalleryAction(Gallery $gallery, Media $media, Request $request)
+    public function editMediaInGalleryAction(GalleryHasMedia $galleryHasMedia, Request $request)
     {
+    	$media = $galleryHasMedia->getMedia();
+    	
     	$form = $this->createForm(new MediaType(), $media)
     		->add('submit', 'submit', ['label' => "Valider", 'attr' => ['class' => 'btn-success']]);
     	
@@ -212,17 +212,16 @@ class GalleryController extends Controller
     			$galleryItem = new GalleryHasMedia();
     			$galleryItem->setGallery($newGallery);
     			$galleryItem->setMedia($media);
-    			$galleryItem->setPosition($gallery->getMaxPosition()+1);
+    			$galleryItem->setPosition($galleryHasMedia->getGallery()->getMaxPosition()+1);
     			$em->persist($galleryItem);
     		}
     		
     		$em->flush();
-    		return $this->redirectToRoute('gallery_show_media', ['galleryId' => $gallery->getId(), 'mediaId' => $media->getId()]);
+    		return $this->redirectToRoute('gallery_show_media', ['id' => $galleryHasMedia->getId()]);
     	}
     	
     	return [
-    		'gallery' => $gallery,
-    		'media' => $media,
+    		'galleryHasMedia' => $galleryHasMedia,
     		'form' => $form->createView()
     	];
     }
