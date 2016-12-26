@@ -1,0 +1,69 @@
+{% extends "ApplicationSonataUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class=" row">
+    	<div class="card col-md-6 col-md-offset-3 col-xs-12">
+	    	{% block sonata_user_login %}
+				<h2 class="text-center">Visual Memories</h2>
+				<br />
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h4 class="text-center">Veuillez saisir vos identifiants pour vous connecter.</h4>
+					</div>
+					<br />
+					<div class="panel-body">
+						{% block sonata_user_login_error %}
+							{% if error %}
+			            		<div class="col-md-10 col-md-offset-1 alert alert-danger text-center">Identifiant ou mot de passe incorrect</div>
+			                {% endif %}
+			            {% endblock %}
+			
+			            {% block sonata_user_login_form %}
+			 	        	<form action="{{ path("fos_user_security_check") }}" method="post" role="form"
+			                      class="form-horizontal">
+				                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+				
+				                <div class="form-group">
+				                	<label for="username" class="col-sm-4 control-label">Identifiant</label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required"/>
+									</div>
+				               	</div>
+				
+				
+				                <div class="form-group control-group">
+				                	<label for="password" class="col-sm-4 control-label">Mot de passe</label>
+									<div class="col-sm-7"><input type="password" class="form-control" id="password" name="_password" required="required"/></div>
+				                </div>
+				
+				                <div class="form-group">
+				                	<div class="col-sm-offset-4 col-sm-8">
+				                    	<div class="checkbox control-group">
+				                        	<label for="remember_me">
+				                            	<input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+				                                Se souvenir de moi
+				                            </label>
+				                        </div>
+				                    </div>
+				                </div>
+				
+				                <div class="form-group control-group">
+				                	<div class="controls col-sm-offset-4 col-sm-8">
+				                        <a href="{{ path('fos_user_resetting_request') }}">Réinitialiser mon mot de passe</a>
+				                    </div>
+				                </div>
+				                            
+				                <div class="form-group">
+				                    <div class="col-sm-offset-4 col-sm-8">
+				                        <input type="submit" id="_submit" name="_submit" class="btn btn-primary" value="Connexion"/>
+				                    </div>
+				                </div>
+				            </form>
+						{% endblock %}
+					</div>
+				</div>
+			{% endblock %}
+		</div>
+    </div>
+{% endblock fos_user_content %}
+

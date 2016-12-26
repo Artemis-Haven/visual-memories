@@ -10,7 +10,28 @@
 {% set gallery = galleryHasMedia.gallery %}
 {% set media = galleryHasMedia.media %}
 
-<h3>Modifier les informations de la photo : {{ media }}</h3>
+<h3>
+	{% if gallery.person %}
+	    <a href="{{ path('person_show', {'id': gallery.person.id}) }}">{{ gallery.person }}</a> 
+	{% elseif gallery.place %}
+	    <a href="{{ path('place_show', {'id': gallery.place.id}) }}">{{ gallery.place }}</a> 
+	{% elseif gallery.event %}
+	    <a href="{{ path('event_show', {'id': gallery.event.id}) }}">{{ gallery.event }}</a> 
+	{% endif %}
+    {{ icon('chevron-right') }}
+    <a href="{{ path('gallery_show', {'id': gallery.id}) }}">Galerie de photos</a>
+    {{ icon('chevron-right') }}
+    <a href="{{ path('gallery_show_media', {'id': galleryHasMedia.id}) }}">{{ media }}</a>
+    {{ icon('chevron-right') }}
+    Modifier les informations
+</h3>
+
+<div class="text-center">
+	{% thumbnail media, 'small' %}
+	<br />
+	{{ media }}
+</div>
+<br />
 
 {{ form(form) }}
 
